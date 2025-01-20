@@ -1,0 +1,2 @@
+# application
+for aws amplify
