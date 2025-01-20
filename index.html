@@ -3,128 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Form</title>
+    <title>Black Hat Hacker Style</title>
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            background: radial-gradient(circle at bottom, #1a237e, #000428, #0f2027);
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            background-size: cover;
-            color: white;
+            padding: 0;
+            background: black;
+            color: #00ff00;
+            font-family: "Courier New", Courier, monospace;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        .container {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'), black;
+            background-size: cover;
         }
 
-        h1 {
-            margin: 0 0 20px;
-            font-size: 2.5em;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        label {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            margin-bottom: 15px;
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            font-size: 1em;
-            background: rgba(255, 255, 255, 0.9);
-            color: #000;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus {
-            outline: none;
-            border: 2px solid #4caf50;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-        }
-
-        button {
-            background: linear-gradient(45deg, #ff6f61, #ff9800);
-            color: white;
-            font-size: 1.2em;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .stars {
+        .matrix {
             position: absolute;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1;
         }
 
-        .stars:before {
-            content: '';
+        .matrix div {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 200%;
-            background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
-            animation: moveStars 100s linear infinite;
+            white-space: nowrap;
+            font-size: 18px;
+            animation: move 5s linear infinite;
         }
 
-        @keyframes moveStars {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-50%, -50%); }
+        @keyframes move {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20%;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #00ff00;
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="container">
-        <h1>Contact Us</h1>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    <div class="background"></div>
+    <div class="matrix" id="matrix"></div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    <h1>Welcome to the Black Hat Portal</h1>
+    <div class="footer">Unauthorized access is prohibited</div>
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
+    <script>
+        const matrix = document.getElementById('matrix');
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+        for (let i = 0; i < 200; i++) {
+            const stream = document.createElement('div');
+            stream.style.left = Math.random() * 100 + 'vw';
+            stream.style.animationDuration = Math.random() * 5 + 3 + 's';
+
+            for (let j = 0; j < Math.random() * 20 + 5; j++) {
+                const char = document.createElement('span');
+                char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+                char.style.display = 'block';
+                char.style.color = `rgb(0, ${Math.floor(Math.random() * 255)}, 0)`;
+                stream.appendChild(char);
+            }
+            matrix.appendChild(stream);
+        }
+    </script>
 </body>
 </html>
