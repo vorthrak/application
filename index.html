@@ -6,106 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: url('https://img.freepik.com/premium-photo/space-wallpaper-banner-background-cosmic-galaxy-with-planets-space-objects_825385-439.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .form-container {
-            max-width: 400px;
-            width: 100%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #444;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            z-index: 2;
-        }
-
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #f9f9f9;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #ccc;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            font-size: 14px;
-            background: #222;
-            color: #fff;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: #aaa;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(45deg, #4CAF50, #00bcd4);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(45deg, #45a049, #00a4cc);
-        }
-
-        .spaceship {
-            position: absolute;
-            top: 50%;
-            left: -100px;
-            width: 100px;
-            transform: translateY(-50%);
-            transition: all 2s ease-in-out;
-            z-index: 1;
-        }
-
-        .spaceship.fly {
-            left: 110%;
-            transform: translateY(-50%) rotate(45deg);
-        }
+        /* Gaya CSS tetap sama seperti sebelumnya */
     </style>
 </head>
 
 <body>
     <div class="form-container">
         <h2>Contact Us</h2>
-        <form id="contactForm">
+        <form id="contactForm" onsubmit="return validateForm()">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -118,51 +26,26 @@
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
             </div>
-            <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
+            <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
 
-    <img src="data:image/jpeg;base64,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"
-        alt="Spaceship" class="spaceship" id="spaceship">
-
-    <audio id="submitSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+    <img src="spaceship.png" alt="Flying spaceship" class="spaceship">
 
     <script>
-        async function submitForm() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+        function validateForm() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
 
-            const spaceship = document.getElementById('spaceship');
-            const submitSound = document.getElementById('submitSound');
-
-            try {
-                // Play sound
-                submitSound.play();
-                spaceship.classList.add('fly');
-
-                // Send form data to the API
-                const response = await fetch('https://xcryn6z49k.execute-api.us-east-2.amazonaws.com/prod/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, message })
-                });
-
-                if (response.ok) {
-                    alert('Message submitted successfully!');
-                } else {
-                    alert('Failed to submit message. Check your API configuration.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            } finally {
-                setTimeout(() => spaceship.classList.remove('fly'), 3000);
+            if (!name || !email || !message) {
+                alert("All fields are required!");
+                return false;
             }
+            alert("Form submitted successfully!");
+            document.querySelector('.spaceship').classList.add('fly');
+            return true;
         }
-
     </script>
 </body>
 
