@@ -1,0 +1,48 @@
+import json
+import time
+import boto3
+from botocore.exceptions import ClientError
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Dummytable')  # Replace with your DynamoDB table name
+
+def lambda_handler(event, context):
+    try:
+        if 'body' not in event:
+            raise KeyError("'body' not found in event")
+
+        body = json.loads(event['body'])
+        name = body.get('name')
+        email = body.get('email')
+        message = body.get('message')
+
+        item = {
+            'id': str(int(time.time() * 1000)),  # Using timestamp as unique ID
+            'name': name,
+            'email': email,
+            'message': message
+        }
+
+        table.put_item(Item=item)
+
+        return {
+            'statusCode': 200,
+            'body': json.dumps({'success': True}),
+           'headers': {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", 
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type",
+            },
+ 
+        }
+    except KeyError as e:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': f'Missing required field: {str(e)}'})
+        }
+    except ClientError as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'success': False, 'error': str(e)})
+        }
