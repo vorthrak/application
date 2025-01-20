@@ -1,94 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Hat Hacker Style</title>
+    <title>Contact Form</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: black;
-            color: #00ff00;
-            font-family: "Courier New", Courier, monospace;
-            overflow: hidden;
-        }
-
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png'), black;
+            background: url('https://img.freepik.com/premium-photo/space-wallpaper-banner-background-cosmic-galaxy-with-planets-space-objects_825385-439.jpg') no-repeat center center fixed;
             background-size: cover;
-        }
-
-        .matrix {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             overflow: hidden;
         }
 
-        .matrix div {
-            position: absolute;
-            white-space: nowrap;
-            font-size: 18px;
-            animation: move 5s linear infinite;
-        }
-
-        @keyframes move {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 20%;
-            text-shadow: 0 0 10px #00ff00;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 0;
+        .form-container {
+            max-width: 400px;
             width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #444;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .form-container h2 {
             text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ccc;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
             font-size: 14px;
-            color: #00ff00;
+            background: #222;
+            color: #fff;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #aaa;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #4CAF50, #00bcd4);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #45a049, #00a4cc);
+        }
+
+        .spaceship {
+            position: absolute;
+            top: 50%;
+            left: -100px;
+            width: 100px;
+            transform: translateY(-50%);
+            transition: all 2s ease-in-out;
+            z-index: 1;
+        }
+
+        .spaceship.fly {
+            left: 110%;
+            transform: translateY(-50%) rotate(45deg);
         }
     </style>
 </head>
+
 <body>
-    <div class="background"></div>
-    <div class="matrix" id="matrix"></div>
+    <div class="form-container">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+            </div>
+            <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
 
-    <h1>Welcome to the Black Hat Portal</h1>
-    <div class="footer">Unauthorized access is prohibited</div>
-
-    <script>
-        const matrix = document.getElementById('matrix');
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-
-        for (let i = 0; i < 200; i++) {
-            const stream = document.createElement('div');
-            stream.style.left = Math.random() * 100 + 'vw';
-            stream.style.animationDuration = Math.random() * 5 + 3 + 's';
-
-            for (let j = 0; j < Math.random() * 20 + 5; j++) {
-                const char = document.createElement('span');
-                char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
-                char.style.display = 'block';
-                char.style.color = `rgb(0, ${Math.floor(Math.random() * 255)}, 0)`;
-                stream.appendChild(char);
-            }
-            matrix.appendChild(stream);
-        }
-    </script>
+    <img src="data:image/jpeg;base64,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' alt="Spaceship" class="spaceship">
 </body>
+
+<script>
+    function submitForm() {
+        const spaceship = document.querySelector('.spaceship');
+        spaceship.classList.add('fly');
+        setTimeout(() => {
+            document.getElementById('contactForm').submit();
+        }, 2000); // Delayed form submission
+    }
+</script>
+
 </html>
