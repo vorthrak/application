@@ -1,132 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+    <title>Contact Us</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             margin: 0;
-            padding: 0;
-            background: url('https://img.freepik.com/premium-photo/space-wallpaper-banner-background-cosmic-galaxy-with-planets-space-objects_825385-439.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
         }
-
-        .form-wrapper {
+        .contact-card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             width: 100%;
-            max-width: 450px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #555;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            max-width: 400px;
         }
-
-        .form-wrapper h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #eaeaea;
+        .contact-card h2 {
+            margin-top: 0;
+            color: #333333;
         }
-
-        .input-group {
-            margin-bottom: 20px;
+        .contact-card form {
+            display: flex;
+            flex-direction: column;
         }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #cccccc;
+        .contact-card label {
+            margin-bottom: 5px;
+            color: #555555;
         }
-
-        .input-group input,
-        .input-group textarea {
-            width: 100%;
-            padding: 12px;
-            background: #222;
-            border: 1px solid #666;
-            border-radius: 5px;
-            color: #eee;
+        .contact-card input, .contact-card textarea, .contact-card button {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
             font-size: 16px;
-        }
-
-        .input-group textarea {
-            resize: none;
-        }
-
-        .input-group input::placeholder,
-        .input-group textarea::placeholder {
-            color: #888;
-        }
-
-        .submit-btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(45deg, #28a745, #17a2b8);
+        }
+        .contact-card input:focus, .contact-card textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .contact-card button {
+            background: #007bff;
+            color: #ffffff;
             border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
         }
-
-        .submit-btn:hover {
-            background: linear-gradient(45deg, #218838, #138496);
-        }
-
-        .animation-ship {
-            position: absolute;
-            top: 50%;
-            left: -150px;
-            width: 120px;
-            transition: transform 3s ease-in-out;
-        }
-
-        .animation-ship.fly {
-            transform: translate(110vw, -50%) rotate(30deg);
+        .contact-card button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
-
 <body>
-    <div class="form-wrapper">
-        <h1>Contact Us</h1>
-        <form id="contact-form">
-            <div class="input-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
-            </div>
-            <div class="input-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="input-group">
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" rows="6" placeholder="Enter your message" required></textarea>
-            </div>
-            <button type="button" class="submit-btn" onclick="sendForm()">Send Message</button>
+    <div class="contact-card">
+        <h2>Get in Touch</h2>
+        <form action="/submit" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Your message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
         </form>
     </div>
-
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgH..." alt="Spaceship" class="animation-ship" id="spaceship">
-
-    <script>
-        function sendForm() {
-            alert('Form submitted successfully!');
-            document.getElementById('spaceship').classList.add('fly');
-        }
-    </script>
 </body>
-
 </html>
